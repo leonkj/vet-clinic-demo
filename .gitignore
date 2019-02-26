@@ -1,12 +1,5 @@
-
-###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
-/public/bundles/
-/var/
-/vendor/
-###< symfony/framework-bundle ###
+/docker-compose.override.yaml
+/docker-compose.override.yml
 
 ###> intellij idea files  ###
 /.idea/

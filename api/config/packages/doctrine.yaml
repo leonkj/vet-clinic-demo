@@ -15,6 +15,9 @@ doctrine:
             charset: utf8
             collate: utf8_unicode_ci
 
+        types:
+            identifier: App\DBAL\Type\IdentifierType
+
         url: '%env(resolve:DATABASE_URL)%'
     orm:
         auto_generate_proxy_classes: true

@@ -18,7 +18,7 @@ class BaseEntityResolver
         return $repository->findAll();
     }
 
-    public function findOne(EntityRepositoryInterface $repository, string $id): ?EntityInterface
+    public function findOne(EntityRepositoryInterface $repository, string $id): EntityInterface
     {
         $entity = $repository->findById($id);
 

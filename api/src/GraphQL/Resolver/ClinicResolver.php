@@ -11,7 +11,7 @@ use App\Repository\ClinicRepositoryInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class ClinicResolverBase implements ResolverInterface, AliasedInterface
+class ClinicResolver implements ResolverInterface, AliasedInterface
 {
     /** @var ClinicRepositoryInterface */
     private $clinicRepository;

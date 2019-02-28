@@ -21,6 +21,8 @@ services:
       - ./api/var:/srv/api/var:rw
     ports:
       - "8000:8000"
+    environment:
+      - SYMFONY_PHPUNIT_VERSION=7.5.6
     command: ["sh", "-c", "bin/console server:run 0.0.0.0:8000"]
 
   db:

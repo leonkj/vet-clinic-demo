@@ -1,0 +1,9 @@
+Clinic:
+  type: object
+  config:
+    description: ""
+    fields:
+      id:
+        type: "String!"
+      name:
+        type: "String!"

@@ -1,0 +1,16 @@
+Query:
+  type: object
+  config:
+    fields:
+      clinics:
+        type: "[Clinic!]!"
+        description: "Read list of all clinics"
+        resolve: "@=resolver('clinics')"
+
+      clinic:
+        type: "Clinic!"
+        description: "Read particular clinic"
+        args:
+          id:
+            type: "String!"
+        resolve: "@=resolver('clinic', [args['id']])"

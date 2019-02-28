@@ -1,0 +1,14 @@
+User:
+  type: object
+  config:
+    fields:
+      id:
+        type: "String!"
+      firstName:
+        type: "String!"
+        resolve: "@=value.getName().getFirstName()"
+      lastName:
+        type: "String!"
+        resolve: "@=value.getName().getLastName()"
+      clinic:
+        type: "Clinic!"

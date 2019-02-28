@@ -1,0 +1,3 @@
+Doctor:
+  type: object
+  inherits: [User]

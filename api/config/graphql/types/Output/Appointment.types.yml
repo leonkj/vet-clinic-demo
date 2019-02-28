@@ -1,0 +1,16 @@
+Appointment:
+  type: object
+  config:
+    fields:
+      id:
+        type: "String!"
+      start:
+        type: "DateTime!"
+        resolve: "@=value.getScheduledAt().getStart()"
+      end:
+        type: "DateTime!"
+        resolve: "@=value.getScheduledAt().getEnd()"
+      doctor:
+        type: "Doctor!"
+      client:
+        type: "Client!"

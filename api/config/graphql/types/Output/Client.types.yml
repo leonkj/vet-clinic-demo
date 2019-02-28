@@ -1,0 +1,3 @@
+Client:
+  type: object
+  inherits: [User]

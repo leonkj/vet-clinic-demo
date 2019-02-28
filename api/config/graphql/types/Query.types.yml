@@ -14,3 +14,42 @@ Query:
           id:
             type: "String!"
         resolve: "@=resolver('clinic', [args['id']])"
+
+      doctors:
+        type: "[Doctor!]!"
+        description: "Read list of all doctors"
+        resolve: "@=resolver('doctors')"
+
+      doctor:
+        type: "Doctor!"
+        description: "Read particular doctor"
+        args:
+          id:
+            type: "String!"
+        resolve: "@=resolver('doctor', [args['id']])"
+
+      clients:
+        type: "[Client!]!"
+        description: "Read list of all clients"
+        resolve: "@=resolver('clients')"
+
+      client:
+        type: "Client!"
+        description: "Read particular client"
+        args:
+          id:
+            type: "String!"
+        resolve: "@=resolver('client', [args['id']])"
+
+      appointments:
+        type: "[Appointment!]!"
+        description: "Read list of all appointments"
+        resolve: "@=resolver('appointments')"
+
+      appointment:
+        type: "Appointment!"
+        description: "Read particular appointment"
+        args:
+          id:
+            type: "String!"
+        resolve: "@=resolver('appointment', [args['id']])"

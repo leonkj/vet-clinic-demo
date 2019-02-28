@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Appointment;
+use App\Entity\EntityInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -22,15 +23,15 @@ class AppointmentRepository extends ServiceEntityRepository implements Appointme
         parent::__construct($registry, Appointment::class);
     }
 
-    public function findById(string $id): ?Appointment
+    public function findById(string $id): ?EntityInterface
     {
         return $this->find($id);
     }
 
     /**
-     * @param Appointment $appointment
+     * @param EntityInterface $appointment
      */
-    public function save(Appointment $appointment): void
+    public function save(EntityInterface $appointment): void
     {
         $entityManager = $this->getEntityManager();
 

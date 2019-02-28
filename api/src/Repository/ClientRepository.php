@@ -7,6 +7,7 @@ namespace App\Repository;
 
 
 use App\Entity\Client;
+use App\Entity\EntityInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -23,15 +24,15 @@ class ClientRepository extends ServiceEntityRepository implements ClientReposito
         parent::__construct($registry, Client::class);
     }
 
-    public function findById(string $id): ?Client
+    public function findById(string $id): ?EntityInterface
     {
         return $this->find($id);
     }
 
     /**
-     * @param Client $client
+     * @param EntityInterface $client
      */
-    public function save(Client $client): void
+    public function save(EntityInterface $client): void
     {
         $entityManager = $this->getEntityManager();
 

@@ -6,11 +6,6 @@ declare(strict_types=1);
 namespace App\Repository;
 
 
-use App\Entity\Doctor;
-
-interface DoctorRepositoryInterface
+interface DoctorRepositoryInterface extends EntityRepositoryInterface
 {
-    public function findById(string $id): ?Doctor;
-
-    public function save(Doctor $doctor): void;
 }

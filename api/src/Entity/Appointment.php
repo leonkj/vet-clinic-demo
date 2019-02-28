@@ -12,7 +12,7 @@ use Webmozart\Assert\Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AppointmentRepository")
  */
-class Appointment
+class Appointment implements EntityInterface
 {
     #region Private properties
 

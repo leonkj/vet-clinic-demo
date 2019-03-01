@@ -7,6 +7,7 @@ namespace App\GraphQL\Resolver;
 
 
 use App\Entity\Appointment;
+use App\Entity\EntityInterface;
 use App\Repository\AppointmentRepositoryInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -31,12 +32,12 @@ class AppointmentResolver implements ResolverInterface, AliasedInterface
         $this->baseEntityResolver = $baseEntityResolver;
     }
 
-    public function getAppointments(): array
+    public function list(): array
     {
         return $this->baseEntityResolver->getList($this->appointmentRepository);
     }
 
-    public function findAppointment(string $id): Appointment
+    public function resolve(string $id): EntityInterface
     {
         return $this->baseEntityResolver->findOne($this->appointmentRepository, $id);
     }
@@ -44,8 +45,8 @@ class AppointmentResolver implements ResolverInterface, AliasedInterface
     public static function getAliases(): array
     {
         return [
-            'getAppointments' => 'appointments',
-            'findAppointment' => 'appointment'
+            'list' => 'appointments',
+            'resolve' => 'appointment'
         ];
     }
 }

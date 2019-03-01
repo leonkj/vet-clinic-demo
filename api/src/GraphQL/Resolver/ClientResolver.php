@@ -7,6 +7,7 @@ namespace App\GraphQL\Resolver;
 
 
 use App\Entity\Client;
+use App\Entity\EntityInterface;
 use App\Repository\ClientRepositoryInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -31,12 +32,12 @@ class ClientResolver implements ResolverInterface, AliasedInterface
         $this->baseEntityResolver = $baseEntityResolver;
     }
 
-    public function getClients(string $clinicId): array
+    public function list(string $clinicId): array
     {
         return $this->clientRepository->findBy(['clinic' => $clinicId]);
     }
 
-    public function findClient(string $id): Client
+    public function resolve(string $id): EntityInterface
     {
         return $this->baseEntityResolver->findOne($this->clientRepository, $id);
     }
@@ -44,8 +45,8 @@ class ClientResolver implements ResolverInterface, AliasedInterface
     public static function getAliases(): array
     {
         return [
-            'getClients' => 'clients',
-            'findClient' => 'client'
+            'list' => 'clients',
+            'resolve' => 'client'
         ];
     }
 }

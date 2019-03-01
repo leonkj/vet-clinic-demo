@@ -20,6 +20,8 @@ class BaseEntityResolver
 
     public function findOne(EntityRepositoryInterface $repository, string $id): EntityInterface
     {
+        Assert::uuid($id);
+
         $entity = $repository->findById($id);
 
         // TODO throw another error to handle further

@@ -1,7 +1,7 @@
 # the different stages of this Dockerfile are meant to be built into separate images
 # https://docs.docker.com/compose/compose-file/#target
 
-ARG PHP_VERSION=7.2
+ARG PHP_VERSION=7.3
 #ARG NGINX_VERSION=1.15
 #ARG VARNISH_VERSION=6.0
 
@@ -68,17 +68,17 @@ WORKDIR /srv/api
 ARG APP_ENV=prod
 
 # prevent the reinstallation of vendors at every changes in the source code
-COPY api/composer.json api/composer.lock api/symfony.lock ./
+COPY composer.json composer.lock symfony.lock ./
 RUN set -eux; \
 	composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress --no-suggest; \
 	composer clear-cache
 
 # copy only specifically what we need
-COPY api/bin bin/
-COPY api/config config/
-COPY api/public public/
-COPY api/src src/
-COPY api/.env .env
+COPY bin bin/
+COPY config config/
+COPY public public/
+COPY src src/
+COPY .env .env
 
 RUN set -eux; \
 	mkdir -p var/cache var/log; \

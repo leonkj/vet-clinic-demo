@@ -4,7 +4,7 @@ services:
   php:
     image: ${CONTAINER_REGISTRY_BASE}/php
     build:
-      context: .
+      context: ./api
       target: vet_clinic_demo_php
       cache_from:
         - ${CONTAINER_REGISTRY_BASE}/php
@@ -39,7 +39,26 @@ services:
     ports:
       - "5432:5432"
 
-  #  api:
+  client:
+    # Use a static website hosting service in production
+    # See https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment
+    image: ${CONTAINER_REGISTRY_BASE}/client
+    build:
+      context: ./client
+      cache_from:
+        - ${CONTAINER_REGISTRY_BASE}/client
+    env_file:
+      - ./client/.env
+    volumes:
+      - ./client:/usr/src/client:rw,cached
+      - /usr/src/client/node_modules
+    ports:
+      - "80:3000"
+
+volumes:
+  db-data: {}
+
+#  api:
 #    image: ${CONTAINER_REGISTRY_BASE}/nginx
 #    build:
 #      context: .
@@ -73,22 +92,6 @@ services:
 #      - /usr/local/var/varnish:exec
 #    ports:
 #      - "8081:80"
-
-#  client:
-#    # Use a static website hosting service in production
-#    # See https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment
-#    image: ${CONTAINER_REGISTRY_BASE}/client
-#    build:
-#      context: ./client
-#      cache_from:
-#        - ${CONTAINER_REGISTRY_BASE}/client
-#    env_file:
-#      - ./client/.env
-#    volumes:
-#      - ./client:/usr/src/client:rw,cached
-#      - /usr/src/client/node_modules
-#    ports:
-#      - "80:3000"
 #
 #  admin:
 #    # Use a static website hosting service in production
@@ -120,6 +123,3 @@ services:
 #      - "444:444"
 #      - "8443:8443"
 #      - "8444:8444"
-
-volumes:
-  db-data: {}

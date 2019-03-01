@@ -3,7 +3,7 @@ Appointment:
   config:
     fields:
       id:
-        type: "String!"
+        type: "ID!"
       start:
         type: "DateTime!"
         resolve: "@=value.getScheduledAt().getStart()"

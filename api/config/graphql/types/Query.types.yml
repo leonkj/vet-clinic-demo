@@ -12,7 +12,7 @@ Query:
         description: "Read particular clinic"
         args:
           id:
-            type: "String!"
+            type: "ID!"
         resolve: "@=resolver('clinic', [args['id']])"
 
       doctors:
@@ -20,7 +20,7 @@ Query:
         description: "Read list of all doctors"
         args:
           clinicId:
-            type: "String!"
+            type: "ID!"
         resolve: "@=resolver('doctors', [args['clinicId']])"
 
       doctor:
@@ -28,7 +28,7 @@ Query:
         description: "Read particular doctor"
         args:
           id:
-            type: "String!"
+            type: "ID!"
         resolve: "@=resolver('doctor', [args['id']])"
 
       clients:
@@ -36,7 +36,7 @@ Query:
         description: "Read list of all clients"
         args:
           clinicId:
-            type: "String!"
+            type: "ID!"
         resolve: "@=resolver('clients', [args['clinicId']])"
 
       client:
@@ -44,7 +44,7 @@ Query:
         description: "Read particular client"
         args:
           id:
-            type: "String!"
+            type: "ID!"
         resolve: "@=resolver('client', [args['id']])"
 
       appointments:
@@ -57,5 +57,5 @@ Query:
         description: "Read particular appointment"
         args:
           id:
-            type: "String!"
+            type: "ID!"
         resolve: "@=resolver('appointment', [args['id']])"

@@ -3,7 +3,7 @@ User:
   config:
     fields:
       id:
-        type: "String!"
+        type: "ID!"
       firstName:
         type: "String!"
         resolve: "@=value.getName().getFirstName()"

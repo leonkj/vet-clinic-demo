@@ -31,10 +31,9 @@ class ClientResolver implements ResolverInterface, AliasedInterface
         $this->baseEntityResolver = $baseEntityResolver;
     }
 
-
-    public function getClients(): array
+    public function getClients(string $clinicId): array
     {
-        return $this->baseEntityResolver->getList($this->clientRepository);
+        return $this->clientRepository->findBy(['clinic' => $clinicId]);
     }
 
     public function findClient(string $id): Client

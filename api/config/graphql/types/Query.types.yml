@@ -18,7 +18,10 @@ Query:
       doctors:
         type: "[Doctor!]!"
         description: "Read list of all doctors"
-        resolve: "@=resolver('doctors')"
+        args:
+          clinicId:
+            type: "String!"
+        resolve: "@=resolver('doctors', [args['clinicId']])"
 
       doctor:
         type: "Doctor!"
@@ -31,7 +34,10 @@ Query:
       clients:
         type: "[Client!]!"
         description: "Read list of all clients"
-        resolve: "@=resolver('clients')"
+        args:
+          clinicId:
+            type: "String!"
+        resolve: "@=resolver('clients', [args['clinicId']])"
 
       client:
         type: "Client!"

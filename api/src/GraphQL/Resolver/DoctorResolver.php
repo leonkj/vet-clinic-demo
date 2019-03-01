@@ -31,9 +31,9 @@ class DoctorResolver implements ResolverInterface, AliasedInterface
         $this->baseEntityResolver = $baseEntityResolver;
     }
 
-    public function getDoctors(): array
+    public function getDoctors(string $clinicId): array
     {
-        return $this->baseEntityResolver->getList($this->doctorRepository);
+        return $this->doctorRepository->findBy(['clinic' => $clinicId]);
     }
 
     public function findDoctor(string $id): Doctor

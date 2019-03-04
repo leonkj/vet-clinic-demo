@@ -34,6 +34,13 @@ class Appointment implements EntityInterface
     private $scheduledAt;
 
     /**
+     * @var Clinic
+     *
+     * @ORM\ManyToOne(targetEntity="Clinic")
+     */
+    private $clinic;
+
+    /**
      * @var Client
      *
      * @ORM\ManyToOne(targetEntity="Client")
@@ -53,24 +60,27 @@ class Appointment implements EntityInterface
      * Appointment constructor.
      *
      * @param DateRange $scheduledAt
+     * @param Clinic $clinic
      * @param Client $client
      * @param Doctor $doctor
      */
-    private function __construct(DateRange $scheduledAt, Client $client, Doctor $doctor)
+    private function __construct(DateRange $scheduledAt, Clinic $clinic, Client $client, Doctor $doctor)
     {
         $this->id = new Identifier();
         $this->scheduledAt = $scheduledAt;
+        $this->clinic = $clinic;
         $this->client = $client;
         $this->doctor = $doctor;
     }
 
     #region Factory methods
 
-    public static function create(DateRange $scheduledAt, Client $client, Doctor $doctor): self
+    public static function create(DateRange $scheduledAt, Clinic $clinic, Client $client, Doctor $doctor): self
     {
-        Assert::true($client->getClinic()->equals($doctor->getClinic()), 'Client and doctor are from different clinics');
+        Assert::true($clinic->equals($doctor->getClinic()), 'Doctor is from different clinic');
+        Assert::true($clinic->equals($client->getClinic()), 'Client is from different clinic');
 
-        return new self($scheduledAt, $client, $doctor);
+        return new self($scheduledAt, $clinic, $client, $doctor);
     }
 
     #endregion Factory methods
@@ -91,6 +101,14 @@ class Appointment implements EntityInterface
     public function getScheduledAt(): DateRange
     {
         return $this->scheduledAt;
+    }
+
+    /**
+     * @return Clinic
+     */
+    public function getClinic(): Clinic
+    {
+        return $this->clinic;
     }
 
     /**

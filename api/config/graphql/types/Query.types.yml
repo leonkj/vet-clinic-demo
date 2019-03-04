@@ -62,3 +62,16 @@ Query:
           id:
             type: "Identifier!"
         resolve: "@=resolver('appointment', [args['id']])"
+
+      services:
+        type: "[Service!]!"
+        description: "Read list of all services"
+        resolve: "@=resolver('services')"
+
+      service:
+        type: "Service!"
+        description: "Read particular service"
+        args:
+          id:
+            type: "Identifier!"
+        resolve: "@=resolver('clinic', [args['id']])"

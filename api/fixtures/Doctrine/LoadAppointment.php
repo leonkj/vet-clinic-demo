@@ -23,6 +23,8 @@ class LoadAppointment extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager): void
     {
+        $service = $this->getReference(LoadService::NAME_PREFIX . 'Examination');
+
         for ($appointmentNumber = 1; $appointmentNumber <= self::AMOUNT; $appointmentNumber++) {
             /** @var Doctor $doctor */
             $doctor = $this->getReference(LoadDoctor::REFERENCE_NAME_PREFIX . $appointmentNumber);

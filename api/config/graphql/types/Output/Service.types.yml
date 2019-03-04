@@ -1,0 +1,8 @@
+Service:
+  type: object
+  config:
+    fields:
+      id:
+        type: "Identifier!"
+      name:
+        type: "String!"

@@ -14,3 +14,5 @@ Appointment:
         type: "Doctor!"
       client:
         type: "Client!"
+      services:
+        type: "[Service!]!"

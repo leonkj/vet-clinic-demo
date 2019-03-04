@@ -6,6 +6,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\CustomType\Identifier;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Webmozart\Assert\Assert;
 
@@ -54,6 +56,11 @@ class Appointment implements EntityInterface
      */
     private $doctor;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Service")
+     */
+    private $services;
+
     #endregion Private properties
 
     /**
@@ -71,6 +78,7 @@ class Appointment implements EntityInterface
         $this->clinic = $clinic;
         $this->client = $client;
         $this->doctor = $doctor;
+        $this->services = new ArrayCollection();
     }
 
     #region Factory methods
@@ -125,6 +133,32 @@ class Appointment implements EntityInterface
     public function getDoctor(): Doctor
     {
         return $this->doctor;
+    }
+
+    /**
+     * @return Collection|Service[]
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): self
+    {
+        if (!$this->services->contains($service)) {
+            $this->services[] = $service;
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): self
+    {
+        if ($this->services->contains($service)) {
+            $this->services->removeElement($service);
+        }
+
+        return $this;
     }
 
     #endregion Public API

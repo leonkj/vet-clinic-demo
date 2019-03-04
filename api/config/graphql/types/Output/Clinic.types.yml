@@ -4,6 +4,6 @@ Clinic:
     description: ""
     fields:
       id:
-        type: "ID!"
+        type: "Identifier!"
       name:
         type: "String!"

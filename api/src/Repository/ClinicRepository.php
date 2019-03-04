@@ -6,27 +6,33 @@ declare(strict_types=1);
 namespace App\Repository;
 
 
+use App\CustomType\Identifier;
 use App\Entity\Clinic;
 use App\Entity\EntityInterface;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Repository\Traits\EntityFoundTrait;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-/**
- * @method Clinic|null find($id, $lockMode = null, $lockVersion = null)
- * @method Clinic|null findOneBy(array $criteria, array $orderBy = null)
- * @method Clinic[]    findAll()
- * @method Clinic[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class ClinicRepository extends ServiceEntityRepository implements EntityRepositoryInterface, ClinicRepositoryInterface
 {
+    use EntityFoundTrait;
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Clinic::class);
     }
 
-    public function findById(string $id): ?EntityInterface
+    /**
+     * {@inheritdoc}
+     */
+    public function findById(Identifier $id): EntityInterface
     {
-        return $this->find($id);
+        /** @var Clinic $clinic */
+        $clinic = $this->find($id);
+
+        $this->assertEntityFound($clinic);
+
+        return $clinic;
     }
 
     /**

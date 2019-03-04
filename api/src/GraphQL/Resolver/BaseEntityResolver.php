@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace App\GraphQL\Resolver;
 
 
+use App\CustomType\Identifier;
 use App\Entity\EntityInterface;
 use App\Repository\EntityRepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -18,7 +19,7 @@ class BaseEntityResolver
         return $repository->findAll();
     }
 
-    public function findOne(EntityRepositoryInterface $repository, string $id): EntityInterface
+    public function findOne(EntityRepositoryInterface $repository, Identifier $id): EntityInterface
     {
         Assert::uuid($id);
 

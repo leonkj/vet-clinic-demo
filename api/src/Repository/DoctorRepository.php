@@ -5,8 +5,10 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\CustomType\Identifier;
 use App\Entity\Doctor;
 use App\Entity\EntityInterface;
+use App\Repository\Traits\EntityFoundTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -18,14 +20,20 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class DoctorRepository extends ServiceEntityRepository implements EntityRepositoryInterface, DoctorRepositoryInterface
 {
+    use EntityFoundTrait;
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Doctor::class);
     }
 
-    public function findById(string $id): ?EntityInterface
+    public function findById(Identifier $id): EntityInterface
     {
-        return $this->find($id);
+        $doctor = $this->find($id);
+
+        $this->assertEntityFound($doctor);
+
+        return $doctor;
     }
 
     /**

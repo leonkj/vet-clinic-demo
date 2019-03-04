@@ -6,8 +6,10 @@ declare(strict_types=1);
 namespace App\Repository;
 
 
+use App\CustomType\Identifier;
 use App\Entity\Client;
 use App\Entity\EntityInterface;
+use App\Repository\Traits\EntityFoundTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,14 +21,20 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ClientRepository extends ServiceEntityRepository implements ClientRepositoryInterface
 {
+    use EntityFoundTrait;
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Client::class);
     }
 
-    public function findById(string $id): ?EntityInterface
+    public function findById(Identifier $id): EntityInterface
     {
-        return $this->find($id);
+        $client = $this->find($id->toString());
+
+        $this->assertEntityFound($client);
+
+        return $client;
     }
 
     /**

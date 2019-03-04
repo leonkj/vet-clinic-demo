@@ -12,7 +12,7 @@ Query:
         description: "Read particular clinic"
         args:
           id:
-            type: "ID!"
+            type: "Identifier!"
         resolve: "@=resolver('clinic', [args['id']])"
 
       doctors:
@@ -20,7 +20,7 @@ Query:
         description: "Read list of all doctors"
         args:
           clinicId:
-            type: "ID!"
+            type: "Identifier!"
         resolve: "@=resolver('doctors', [args['clinicId']])"
 
       doctor:
@@ -28,7 +28,7 @@ Query:
         description: "Read particular doctor"
         args:
           id:
-            type: "ID!"
+            type: "Identifier!"
         resolve: "@=resolver('doctor', [args['id']])"
 
       clients:
@@ -36,7 +36,7 @@ Query:
         description: "Read list of all clients"
         args:
           clinicId:
-            type: "ID!"
+            type: "Identifier!"
         resolve: "@=resolver('clients', [args['clinicId']])"
 
       client:
@@ -44,18 +44,21 @@ Query:
         description: "Read particular client"
         args:
           id:
-            type: "ID!"
+            type: "Identifier!"
         resolve: "@=resolver('client', [args['id']])"
 
       appointments:
         type: "[Appointment!]!"
         description: "Read list of all appointments"
-        resolve: "@=resolver('appointments')"
+        args:
+          filter:
+            type: "AppointmentsFilter!"
+        resolve: "@=resolver('appointments', [args['filter']])"
 
       appointment:
         type: "Appointment!"
         description: "Read particular appointment"
         args:
           id:
-            type: "ID!"
+            type: "Identifier!"
         resolve: "@=resolver('appointment', [args['id']])"

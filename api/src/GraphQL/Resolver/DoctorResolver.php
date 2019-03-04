@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace App\GraphQL\Resolver;
 
 
+use App\CustomType\Identifier;
 use App\Entity\Doctor;
 use App\Entity\EntityInterface;
 use App\Repository\DoctorRepositoryInterface;
@@ -32,12 +33,12 @@ class DoctorResolver implements ResolverInterface, AliasedInterface
         $this->baseEntityResolver = $baseEntityResolver;
     }
 
-    public function list(string $clinicId): array
+    public function list(Identifier $clinicId): array
     {
         return $this->doctorRepository->findBy(['clinic' => $clinicId]);
     }
 
-    public function resolve(string $id): EntityInterface
+    public function resolve(Identifier $id): EntityInterface
     {
         return $this->baseEntityResolver->findOne($this->doctorRepository, $id);
     }

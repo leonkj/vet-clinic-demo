@@ -23,7 +23,7 @@ services:
       - "8000:8000"
     environment:
       - SYMFONY_PHPUNIT_VERSION=7.5.6
-    command: ["sh", "-c", "bin/console server:run 0.0.0.0:8000"]
+    command: ["sh", "-c", "composer install && bin/console server:run 0.0.0.0:8000"]
 
   db:
     # In production, you may want to use a managed database service

@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadAppointment extends Fixture implements DependentFixtureInterface
 {
-    private const AMOUNT = 10;
+    private const AMOUNT = 100;
 
     /**
      * {@inheritdoc}
@@ -25,14 +25,15 @@ class LoadAppointment extends Fixture implements DependentFixtureInterface
     {
         for ($appointmentNumber = 1; $appointmentNumber <= self::AMOUNT; $appointmentNumber++) {
             /** @var Doctor $doctor */
-            $doctor = $this->getReference(LoadDoctor::REFERENCE_NAME_PREFIX . random_int(1, LoadDoctor::AMOUNT));
+            $doctor = $this->getReference(LoadDoctor::REFERENCE_NAME_PREFIX . $appointmentNumber);
             /** @var Client $client */
-            $client = $this->getReference(LoadClient::REFERENCE_NAME_PREFIX . random_int(1, LoadClient::AMOUNT));
+            $client = $this->getReference(LoadClient::REFERENCE_NAME_PREFIX . $appointmentNumber);
 
             $start = new \DateTimeImmutable('today +' . random_int(0, 2880) . ' minutes');
+            /** @var DateRange $dateRange */
             $dateRange = DateRange::create($start, $start->modify('+' . random_int(30, 120) . ' minutes'));
 
-            $appointment = Appointment::create($dateRange, $client, $doctor);
+            $appointment = Appointment::create($dateRange, $doctor->getClinic(), $client, $doctor);
 
             $manager->persist($appointment);
         }

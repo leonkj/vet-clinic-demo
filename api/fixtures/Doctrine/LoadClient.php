@@ -44,7 +44,7 @@ class LoadClient extends Fixture implements DependentFixtureInterface
                 $client = Client::create($this->generator->firstName, $this->generator->lastName, $clinic);
 
                 $manager->persist($client);
-                $this->setReference(self::REFERENCE_NAME_PREFIX . $clientNumber, $client);
+                $this->setReference(self::REFERENCE_NAME_PREFIX . (10 * ($clinicNumber - 1) + $clientNumber), $client);
             }
         }
 

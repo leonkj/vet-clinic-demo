@@ -46,7 +46,7 @@ class LoadDoctor extends Fixture implements DependentFixtureInterface
                 $doctor = Doctor::create(self::NAME_PREFIX . $this->generator->firstName, $this->generator->lastName, $clinic);
 
                 $manager->persist($doctor);
-                $this->setReference(self::REFERENCE_NAME_PREFIX . $doctorNumber, $doctor);
+                $this->setReference(self::REFERENCE_NAME_PREFIX . (10 * ($clinicNumber - 1) + $doctorNumber), $doctor);
             }
         }
 

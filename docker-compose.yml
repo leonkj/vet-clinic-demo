@@ -9,7 +9,7 @@ services:
       cache_from:
         - ${CONTAINER_REGISTRY_BASE}/php
         - ${CONTAINER_REGISTRY_BASE}/nginx
-        - ${CONTAINER_REGISTRY_BASE}/varnish
+#        - ${CONTAINER_REGISTRY_BASE}/varnish
     depends_on:
       - db
     env_file:

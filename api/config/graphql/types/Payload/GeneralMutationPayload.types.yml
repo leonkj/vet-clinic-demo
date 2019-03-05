@@ -1,0 +1,6 @@
+GeneralMutationPayload:
+  type: object
+  config:
+    fields:
+      mutatedId:
+        type: "Identifier!"

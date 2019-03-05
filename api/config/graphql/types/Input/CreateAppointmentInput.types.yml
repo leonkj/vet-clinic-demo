@@ -1,0 +1,16 @@
+CreateAppointmentInput:
+  type: input-object
+  config:
+    fields:
+      clinicId:
+        type: "Identifier!"
+      clientId:
+        type: "Identifier!"
+      doctorId:
+        type: "Identifier!"
+      start:
+        type: "DateTime!"
+      stop:
+        type: "DateTime!"
+      services:
+        type: "[Identifier!]!"

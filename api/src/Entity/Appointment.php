@@ -83,12 +83,18 @@ class Appointment implements EntityInterface
 
     #region Factory methods
 
-    public static function create(DateRange $scheduledAt, Clinic $clinic, Client $client, Doctor $doctor): self
+    public static function create(DateRange $scheduledAt, Clinic $clinic, Client $client, Doctor $doctor, array $services): self
     {
         Assert::true($clinic->equals($doctor->getClinic()), 'Doctor is from different clinic');
         Assert::true($clinic->equals($client->getClinic()), 'Client is from different clinic');
 
-        return new self($scheduledAt, $clinic, $client, $doctor);
+        $appointment = new self($scheduledAt, $clinic, $client, $doctor);
+
+        foreach ($services as $service) {
+            $appointment->addService($service);
+        }
+
+        return $appointment;
     }
 
     #endregion Factory methods

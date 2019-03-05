@@ -35,8 +35,7 @@ class LoadAppointment extends Fixture implements DependentFixtureInterface
             /** @var DateRange $dateRange */
             $dateRange = DateRange::create($start, $start->modify('+' . random_int(30, 120) . ' minutes'));
 
-            $appointment = Appointment::create($dateRange, $doctor->getClinic(), $client, $doctor);
-            $appointment->addService($service);
+            $appointment = Appointment::create($dateRange, $doctor->getClinic(), $client, $doctor, [$service]);
 
             $manager->persist($appointment);
         }

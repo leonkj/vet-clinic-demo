@@ -14,7 +14,6 @@ use App\Repository\AppointmentRepositoryInterface;
 use App\Repository\ClientRepositoryInterface;
 use App\Repository\ClinicRepositoryInterface;
 use App\Repository\DoctorRepositoryInterface;
-use Webmozart\Assert\Assert;
 
 class ScheduleFactory
 {
@@ -62,15 +61,9 @@ class ScheduleFactory
 
         /** @var Client $client */
         $client = null !== $filter->getClientId() ? $this->clientRepository->findById($filter->getClientId()) : null;
-        if ($client) {
-            Assert::true($clinic->equals($client->getClinic()));
-        }
 
         /** @var Doctor $doctor */
         $doctor = null !== $filter->getDoctorId() ? $this->doctorRepository->findById($filter->getDoctorId()) : null;
-        if ($doctor) {
-            Assert::true($clinic->equals($doctor->getClinic()));
-        }
 
         $appointments = $this->appointmentRepository->findAppointments($clinic, $filter->getRange(), $doctor, $client);
 

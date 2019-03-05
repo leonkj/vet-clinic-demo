@@ -50,15 +50,8 @@ class AppointmentsFilter
     private function __construct(Identifier $clinicId, ?Identifier $doctorId, ?Identifier $clientId, DateTimeImmutable $start, DateTimeImmutable $stop)
     {
         $this->clinicId = $clinicId;
-
-        if (null !== $doctorId) {
-            $this->doctorId = $doctorId;
-        }
-
-        if (null !== $clientId) {
-            $this->clientId = $clientId;
-        }
-
+        $this->doctorId = $doctorId;
+        $this->clientId = $clientId;
         $this->range = DateRange::create($start, $stop);
     }
 

@@ -1,0 +1,10 @@
+Mutation:
+  type: object
+  config:
+    fields:
+      CreateAppointment:
+        type: "GeneralMutationPayload!"
+        resolve: "@=mutation('create_appointment', [args['input']])"
+        args:
+          input:
+            type: "CreateAppointmentInput!"

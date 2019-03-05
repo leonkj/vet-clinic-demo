@@ -1,4 +1,6 @@
 overblog_graphql:
+    security:
+        handle_cors: true
     definitions:
         schema:
             query: Query

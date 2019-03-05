@@ -6,7 +6,6 @@ declare(strict_types=1);
 namespace App\Service\Schedule;
 
 
-use App\DTO\Filter\AppointmentsFilter;
 use App\Entity\Client;
 use App\Entity\Clinic;
 use App\Entity\Doctor;

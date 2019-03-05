@@ -7,7 +7,7 @@ namespace App\GraphQL\Resolver;
 
 
 use App\CustomType\Identifier;
-use App\DTO\Filter\AppointmentsFilter;
+use App\Service\Schedule\AppointmentsFilter;
 use App\Entity\Appointment;
 use App\Entity\EntityInterface;
 use App\Repository\AppointmentRepositoryInterface;

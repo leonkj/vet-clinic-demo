@@ -8,3 +8,10 @@ Mutation:
         args:
           input:
             type: "CreateAppointmentInput!"
+
+      UpdateAppointment:
+        type: "GeneralMutationPayload!"
+        resolve: "@=mutation('update_appointment', [args['input']])"
+        args:
+          input:
+            type: "UpdateAppointmentInput!"

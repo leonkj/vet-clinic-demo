@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class User implements UserInterface
+abstract class User implements UserInterface, EntityInterface
 {
     #region Private properties
 
@@ -70,7 +70,7 @@ abstract class User implements UserInterface
     /**
      * @return Identifier
      */
-    public function getId(): ?Identifier
+    public function getId(): Identifier
     {
         return $this->id;
     }

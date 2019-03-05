@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DoctorRepository")
  */
-class Doctor extends User implements EntityInterface
+class Doctor extends User
 {
 
 }

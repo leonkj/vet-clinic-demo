@@ -6,6 +6,8 @@ declare(strict_types=1);
 namespace App\GraphQL\Mutation;
 
 
+use App\Entity\Appointment;
+use App\Entity\DateRange;
 use App\Repository\AppointmentRepositoryInterface;
 use App\Service\Appointment\AppointmentFactory;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
@@ -39,9 +41,20 @@ class AppointmentMutation implements MutationInterface, AliasedInterface
         return ['mutatedId' => $appointment->getId()];
     }
 
-    public function update()
+    public function update(array $input)
     {
+        // TODO move to service
 
+        /** @var Appointment $appointment */
+        $appointment = $this->appointmentRepository->findById($input['id']);
+
+        /** @var DateRange $range */
+        $range = DateRange::create($input['start'], $input['stop']);
+
+        $appointment->updateScheduledAt($range);
+        $this->appointmentRepository->save($appointment);
+
+        return ['mutatedId' => $appointment->getId()];
     }
 
     public static function getAliases()

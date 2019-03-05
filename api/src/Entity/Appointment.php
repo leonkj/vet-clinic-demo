@@ -167,5 +167,10 @@ class Appointment implements EntityInterface
         return $this;
     }
 
+    public function updateScheduledAt(DateRange $newScheduledAt)
+    {
+        $this->scheduledAt = $newScheduledAt;
+    }
+
     #endregion Public API
 }
